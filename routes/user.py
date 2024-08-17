@@ -1,5 +1,5 @@
-from fastapi import APIRouter
-from bson import ObjectId
+from fastapi import APIRouter # type: ignore
+from bson import ObjectId # type: ignore
 
 from models.user import User
 from config.db import conn
