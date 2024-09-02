@@ -1,19 +1,29 @@
-# def userEntity(item) -> dict:
-#     return {
-#         "id": str(item["_id"]),
-#         "name" : item["name"],
-#         "email" : item["email"],
-#         "password" : item["password"]
-#     }
+from pydantic import BaseModel
+from typing import Optional
 
-# def usersEntity(entity) -> list:
-#     return [userEntity(item) for item in entity]
 
-def serializeDict(item) -> dict:
-    return {
-        **{i: str(item[i]) for i in item if i == "_id"},
-        **{i: str(item[i]) for i in item if i != "_id"},
-    }
+class UserBase(BaseModel):
+    name: str
+    email: str
 
-def serializeList(entity) -> list:
-    return [serializeDict(item) for item in entity]
+
+class UserCreate(UserBase):
+    password: str
+
+
+class UserUpdateRequest(BaseModel):
+    user_id: int
+    name: Optional[str] = None
+    email: Optional[str] = None
+    password: Optional[str] = None
+
+
+class UserIdRequest(BaseModel):
+    user_id: int
+
+
+class User(UserBase):
+    user_id: int
+
+    class Config:
+        from_attributes = True
