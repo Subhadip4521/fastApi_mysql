@@ -1,10 +1,10 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from decouple import config
+from config.settings import DATABASE_URL
 
 # Example: 'mysql+pymysql://username:password@localhost/dbname'
-URL_DATABASE = config("DATABASE_URL")
+URL_DATABASE = DATABASE_URL
 
 # Create the SQLAlchemy engine
 engine = create_engine(URL_DATABASE) # type: ignore

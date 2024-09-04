@@ -8,6 +8,8 @@ pip install python-jose
 pip install passlib
 pip install bcrypt
 
+pip install python-dotenv
+
 python -m venv myenv
 .\myenv\Scripts\Activate
 

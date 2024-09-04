@@ -23,18 +23,18 @@ class NoteIdRequest(BaseModel):
 
 
 class NoteUpdate(BaseModel):
+    note_id: int
     title: Optional[str] = None
     description: Optional[str] = None
     tag: Optional[str] = None
     note_subject: Optional[str] = None
 
+    class Config:
+        from_attributes = True
 
-class NoteInDB(BaseModel):
+
+class NoteInDB(NoteBase):
     note_id: int
-    title: str
-    description: str
-    tag: Optional[str] = None
-    note_subject: Optional[str] = None
     timestamp: datetime
     author_id: int
 
@@ -50,7 +50,7 @@ class NotesListRequest(BaseModel):
 class NoteResponse(BaseModel):
     status: bool
     detail: str
-    data: NoteInDB
+    data: Optional[NoteInDB]  # Use Optional to handle the case where no note is found
 
 
 class NotesListResponse(BaseModel):
@@ -67,3 +67,4 @@ class DeleteNoteRequest(BaseModel):
 class DeleteNoteResponse(BaseModel):
     status: bool
     detail: str
+    data: Optional[str] = None
